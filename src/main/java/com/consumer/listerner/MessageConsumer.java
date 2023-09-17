@@ -4,8 +4,8 @@ import com.consumer.model.User;
 import com.consumer.util.JsonUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -16,6 +16,8 @@ import javax.jms.TextMessage;
 @Slf4j
 public class MessageConsumer {
 
+
+    @Async(value = "threadPoolTaskExecutor")
     @JmsListener(destination = "topic-test")
     public void messageReceiver(Session session, Message message){
 
